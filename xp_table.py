@@ -31,7 +31,7 @@ result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="xptable!
 values = result.get('values', [])
 #for row in values:
     #print(row)
-cell_value = result["values"][encounter_level+1][party_level]
+cell_value = result["values"][encounter_level+1][party_level]   ###
 xp_per_member = int(cell_value) / int(party_size)
 print("The party has earned " + str(cell_value) + " points of experience")
 print("Each party member gets " + str(xp_per_member) + " points of experience")
