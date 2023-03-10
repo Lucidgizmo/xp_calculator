@@ -9,11 +9,16 @@ from googleapiclient.errors import HttpError
 from google.oauth2 import service_account
 import gspread
 
-print()
+gc = gspread.service_account("./credentials.json")
+sh = gc.open('xp_table')
+print(sh.sheet1.get('K7'))
+# worksheet = sh.xptable
+worksheet_list = sh.worksheets()
+print(worksheet_list)
 
 # Creating Google Sheets Scopes
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-SERVICE_ACCOUNT_FILE = 'sheet_keys.json'
+SERVICE_ACCOUNT_FILE = 'credentials.json'
 
 credentials = None
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
@@ -30,7 +35,7 @@ service = build('sheets', 'v4', credentials=credentials)
 sheet = service.spreadsheets()
 result = sheet.values().get(spreadsheetId=SAMPLE_SPREADSHEET_ID, range="diceroller!A1:Ui6").execute()
 values = result.get('values', [])
-print(values)
+#print(values)
 
 
 
@@ -38,6 +43,9 @@ print(values)
 
 # dice rolling app
 import random
+
+def Get_Cell_Value():
+    cell_value = worksheet.acell('B1').value
 
 def Roll_Stats_3d6():
     numberOfStats = 6
@@ -57,7 +65,7 @@ def Roll_Custom_Dice():
         (print("You rolled a" + int(random.randint(1, numberOfSides))))
 
 def Roll_Caster_Lvl_D6():
-    numberOfDice = 6 # This will end up taking the caster level from the sheet.
+    numberOfDice = worksheet.cell('B5').value
     total_of_rolls = 0
     for i in range(numberOfDice):
         Roll = (random.randint(1, 6))
@@ -80,6 +88,7 @@ def Roll_4d6_Droplowest():
 
 # Roll_Custom_Dice()   Roll_Stats_3d6()   Roll_4d6_Droplowest()
 # Roll_Caster_Lvl_D6()
+
 
 # List of Dice Rolling Functions - Not yet implemented
 # Roll_Caster_Lvl_D8()   Roll_Caster_Lvl_D10()   Roll_Caster_Lvl_D12()   Roll_Caster_Lvl_D20()

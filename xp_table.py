@@ -11,7 +11,7 @@ import gspread
 
 # Creating Google Sheets Scopes
 SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-SERVICE_ACCOUNT_FILE = 'sheet_keys.json'
+SERVICE_ACCOUNT_FILE = 'credentials.json'
 
 credentials = None
 credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE, scopes=SCOPES)
