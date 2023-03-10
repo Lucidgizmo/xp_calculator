@@ -11,7 +11,7 @@ import gspread
 
 gc = gspread.service_account("./credentials.json")
 sh = gc.open('xp_table')
-print(sh.sheet1.get('K7'))
+print(sh.sheet1.get('K7'))  # when changing to sheet2, returns with error
 # worksheet = sh.xptable
 worksheet_list = sh.worksheets()
 print(worksheet_list)
